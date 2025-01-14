@@ -19,8 +19,11 @@ A simple web service built with FastAPI, uvicorn, and Tailwind CSS.
 │   └── test_app.py       # Application tests
 ├── .github/              # GitHub configuration
 │   └── workflows/        # GitHub Actions workflows
+├── .dockerignore        # Docker ignore rules
 ├── .gitignore           # Git ignore rules
+├── Dockerfile           # Docker image definition
 ├── README.md            # Project documentation
+├── docker-compose.yml   # Docker Compose configuration
 ├── requirements.txt     # Python dependencies
 ├── ruff.toml           # Ruff linter configuration
 ├── pytest.ini          # Pytest configuration
@@ -28,6 +31,27 @@ A simple web service built with FastAPI, uvicorn, and Tailwind CSS.
 ```
 
 ## Setup
+
+### Using Docker (Recommended)
+
+1. Build and start the container:
+```bash
+docker compose up --build
+```
+
+The application will be available at http://localhost:8000
+
+To run in detached mode:
+```bash
+docker compose up -d
+```
+
+To stop the container:
+```bash
+docker compose down
+```
+
+### Manual Setup
 
 1. Create and activate a virtual environment:
 ```bash
@@ -49,7 +73,14 @@ python run.py
 
 ## Testing
 
-Run the tests using pytest:
+### With Docker
+
+```bash
+docker compose exec web pytest
+```
+
+### Without Docker
+
 ```bash
 pytest
 ```
@@ -61,7 +92,19 @@ This will run all tests with verbose output. The test suite includes:
 
 ## Code Quality
 
-The project uses Ruff for linting. Run the linter with:
+### With Docker
+
+```bash
+docker compose exec web ruff check .
+```
+
+To automatically fix issues:
+```bash
+docker compose exec web ruff check --fix .
+```
+
+### Without Docker
+
 ```bash
 ruff check .
 ```
@@ -77,6 +120,7 @@ GitHub Actions automatically runs the following checks on all pull requests and 
 - Tests on Python 3.11, 3.12, and 3.13
 - Linting with Ruff
 - Code style verification
+- Docker build verification
 
 ## API Documentation
 
@@ -92,6 +136,7 @@ GitHub Actions automatically runs the following checks on all pull requests and 
 - Comprehensive test suite
 - Continuous Integration with GitHub Actions
 - Code quality enforcement with Ruff
+- Docker support for easy deployment
 
 ## Best Practices
 
@@ -113,9 +158,23 @@ This project follows several Python and FastAPI best practices:
    - Dependency management
    - Continuous Integration
    - Code quality gates
+   - Docker containerization
 
 4. **API Design**
    - RESTful principles
    - Clear error handling
    - Comprehensive documentation
-   - Type-safe responses 
+   - Type-safe responses
+
+## Docker Configuration
+
+The project includes a production-ready Docker setup with:
+
+1. **Multi-stage builds** for optimal image size
+2. **Health checks** for container monitoring
+3. **Volume mounting** for development
+4. **Environment variable** support
+5. **Security best practices**:
+   - Non-root user
+   - Minimal base image
+   - No unnecessary dependencies 
