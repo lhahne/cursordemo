@@ -39,6 +39,25 @@ This will run all tests with verbose output. The test suite includes:
 - Static file serving
 - API documentation availability
 
+## Code Quality
+
+The project uses Ruff for linting. Run the linter with:
+```bash
+ruff check .
+```
+
+To automatically fix issues:
+```bash
+ruff check --fix .
+```
+
+## Continuous Integration
+
+GitHub Actions automatically runs the following checks on all pull requests and pushes to main:
+- Tests on Python 3.11, 3.12, and 3.13
+- Linting with Ruff
+- Code style verification
+
 ## Access the Application
 
 - Web Interface: http://localhost:8000
@@ -54,4 +73,6 @@ This will run all tests with verbose output. The test suite includes:
 - `venv/` - Virtual environment (don't commit this)
 - `tests/` - Test suite
   - `test_main.py` - Main application tests
-- `pytest.ini` - Pytest configuration 
+- `pytest.ini` - Pytest configuration
+- `.github/workflows/` - GitHub Actions CI configuration
+- `ruff.toml` - Ruff linter configuration 
