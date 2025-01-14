@@ -27,6 +27,18 @@ Or with uvicorn directly:
 uvicorn main:app --reload
 ```
 
+## Testing
+
+Run the tests using pytest:
+```bash
+pytest
+```
+
+This will run all tests with verbose output. The test suite includes:
+- Endpoint testing
+- Static file serving
+- API documentation availability
+
 ## Access the Application
 
 - Web Interface: http://localhost:8000
@@ -39,4 +51,7 @@ uvicorn main:app --reload
 - `static/` - Static files directory
   - `index.html` - Main webpage with Tailwind CSS
 - `requirements.txt` - Python dependencies
-- `venv/` - Virtual environment (don't commit this) 
+- `venv/` - Virtual environment (don't commit this)
+- `tests/` - Test suite
+  - `test_main.py` - Main application tests
+- `pytest.ini` - Pytest configuration 
