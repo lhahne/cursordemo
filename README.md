@@ -2,6 +2,31 @@
 
 A simple web service built with FastAPI, uvicorn, and Tailwind CSS.
 
+## Project Structure
+
+```
+.
+├── app/                    # Application package
+│   ├── __init__.py        # Package initialization
+│   ├── main.py            # Application factory and configuration
+│   ├── routers/           # API route handlers
+│   │   ├── __init__.py
+│   │   ├── root_router.py # Root endpoint handlers
+│   │   └── time_router.py # Time-related endpoint handlers
+│   └── static/            # Static files
+│       └── index.html     # Main webpage
+├── tests/                 # Test suite
+│   └── test_app.py       # Application tests
+├── .github/              # GitHub configuration
+│   └── workflows/        # GitHub Actions workflows
+├── .gitignore           # Git ignore rules
+├── README.md            # Project documentation
+├── requirements.txt     # Python dependencies
+├── ruff.toml           # Ruff linter configuration
+├── pytest.ini          # Pytest configuration
+└── run.py              # Application entry point
+```
+
 ## Setup
 
 1. Create and activate a virtual environment:
@@ -19,12 +44,7 @@ pip install -r requirements.txt
 
 3. Run the server:
 ```bash
-python main.py
-```
-
-Or with uvicorn directly:
-```bash
-uvicorn main:app --reload
+python run.py
 ```
 
 ## Testing
@@ -58,21 +78,44 @@ GitHub Actions automatically runs the following checks on all pull requests and 
 - Linting with Ruff
 - Code style verification
 
-## Access the Application
+## API Documentation
 
 - Web Interface: http://localhost:8000
 - API Documentation: http://localhost:8000/docs
 - Alternative API Documentation: http://localhost:8000/redoc
 
-## Project Structure
+## Features
 
-- `main.py` - FastAPI application
-- `static/` - Static files directory
-  - `index.html` - Main webpage with Tailwind CSS
-- `requirements.txt` - Python dependencies
-- `venv/` - Virtual environment (don't commit this)
-- `tests/` - Test suite
-  - `test_main.py` - Main application tests
-- `pytest.ini` - Pytest configuration
-- `.github/workflows/` - GitHub Actions CI configuration
-- `ruff.toml` - Ruff linter configuration 
+- Local time display with automatic timezone detection
+- RESTful API endpoints for time information
+- Modern UI with Tailwind CSS
+- Comprehensive test suite
+- Continuous Integration with GitHub Actions
+- Code quality enforcement with Ruff
+
+## Best Practices
+
+This project follows several Python and FastAPI best practices:
+
+1. **Project Structure**
+   - Modular package organization
+   - Separation of concerns (routers, static files)
+   - Clear entry points
+
+2. **Code Quality**
+   - Type hints
+   - Docstrings
+   - Linting with Ruff
+   - Automated testing
+
+3. **Development Workflow**
+   - Virtual environment management
+   - Dependency management
+   - Continuous Integration
+   - Code quality gates
+
+4. **API Design**
+   - RESTful principles
+   - Clear error handling
+   - Comprehensive documentation
+   - Type-safe responses 

@@ -1,21 +1,15 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+"""Time-related endpoints router."""
 from datetime import datetime
+
 import pytz
-import uvicorn
+from fastapi import APIRouter, HTTPException
+from fastapi.responses import JSONResponse
 
-app = FastAPI(title="FastAPI Web Service")
+router = APIRouter(tags=["time"])
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/")
-async def read_root():
-    return FileResponse("static/index.html")
-
-@app.get("/api/datetime")
-async def get_datetime(timezone: str = "UTC"):
+@router.get("/datetime")
+async def get_datetime(timezone: str = "UTC") -> JSONResponse:
     """Get current date and time for the specified timezone."""
     try:
         tz = pytz.timezone(timezone)
@@ -30,13 +24,10 @@ async def get_datetime(timezone: str = "UTC"):
             "day_of_week": current_time.strftime("%A")
         })
     except pytz.exceptions.UnknownTimeZoneError:
-        return JSONResponse(
+        raise HTTPException(
             status_code=400,
-            content={
+            detail={
                 "error": "Invalid timezone",
                 "message": f"Timezone '{timezone}' not found. Please use a valid timezone name (e.g., 'UTC', 'Europe/London', 'America/New_York')."
             }
-        )
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True) 
+        ) 
