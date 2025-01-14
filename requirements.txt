@@ -2,5 +2,7 @@ fastapi==0.110.0
 uvicorn[standard]==0.27.1
 python-multipart==0.0.9
 pytest==8.1.1
-httpx==0.27.0  # For async HTTP client in tests
-ruff==0.3.4    # Fast Python linter 
+httpx==0.27.0  # For async HTTP client in tests and API calls
+ruff==0.3.4    # Fast Python linter
+python-dotenv==1.0.1  # For environment variables
+pytz==2024.1   # For timezone support 
